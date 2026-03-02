@@ -1,0 +1,50 @@
+{
+  "name": "bidi-claude-code",
+  "displayName": "BiDi Fix for Claude Code",
+  "description": "Fixes bidirectional text (RTL/LTR) rendering in Claude Code for Right-To-Left languages (Hebrew, etc.)",
+  "version": "1.0.3",
+  "publisher": "Giosolo",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/guyslo/bidi-claude-code"
+  },
+  "bugs": {
+    "url": "https://github.com/guyslo/bidi-claude-code/issues"
+  },
+  "homepage": "https://github.com/guyslo/bidi-claude-code#readme",
+  "engines": {
+    "vscode": "^1.85.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "keywords": [
+    "bidi",
+    "rtl",
+    "hebrew",
+    "arabic",
+    "claude-code",
+    "bidirectional"
+  ],
+  "activationEvents": [
+    "onStartupFinished"
+  ],
+  "main": "./extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "bidi-claude-code.apply",
+        "title": "BiDi Fix: Apply Patch to Claude Code"
+      },
+      {
+        "command": "bidi-claude-code.remove",
+        "title": "BiDi Fix: Remove Patch from Claude Code"
+      },
+      {
+        "command": "bidi-claude-code.status",
+        "title": "BiDi Fix: Check Patch Status"
+      }
+    ]
+  }
+}
