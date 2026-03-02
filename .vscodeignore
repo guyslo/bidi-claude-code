@@ -1,0 +1,6 @@
+.vscode/**
+.git/**
+patch-now.js
+*.vsix
+.gitignore
+.bidi-disabled

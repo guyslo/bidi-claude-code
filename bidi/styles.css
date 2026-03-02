@@ -1,0 +1,87 @@
+/* BIDI-FIX-START */
+/* BiDi Fix for Claude Code v1.0.0
+ *
+ * Claude Code sets: * { direction: ltr; unicode-bidi: bidi-override }
+ * which forces ALL text to render LTR, breaking Hebrew/Arabic/Persian/Yiddish.
+ *
+ * Strategy:
+ * - CSS: override unicode-bidi on text elements so the browser can render BiDi
+ * - JS:  ratio-based detection sets dir + inline styles for elements where
+ *        CSS first-strong-character detection gets it wrong
+ *
+ * Block element rules use no !important so JS inline styles can override them.
+ * Code block and list/table layout rules use !important to beat Claude Code's CSS.
+ */
+
+/* Block elements: plaintext for auto-detection of text direction */
+p, li, h1, h2, h3, h4, h5, h6,
+td, th, blockquote, summary, details,
+dd, dt, figcaption, caption {
+  unicode-bidi: plaintext;
+}
+
+/* Inline elements: normal to participate in parent's BiDi algorithm */
+span, strong, em, b, i, a, label,
+sub, sup, small, mark, del, ins, u, s {
+  unicode-bidi: normal;
+}
+
+/* Input boxes */
+textarea, [contenteditable="true"], [contenteditable],
+[class*="messageInput_"] {
+  unicode-bidi: plaintext !important;
+}
+
+/* User message bubble text */
+[class*="userMessage_"] span,
+[class*="userMessage_"] p,
+[class*="userMessage_"] {
+  unicode-bidi: plaintext;
+}
+
+/* Code blocks: always LTR */
+pre, code, [class*="language-"], .hljs {
+  direction: ltr !important;
+  text-align: left !important;
+  unicode-bidi: embed !important;
+}
+
+/* RTL lists */
+ul[dir="rtl"], ol[dir="rtl"] {
+  direction: rtl !important;
+  padding-right: 2em !important;
+  padding-left: 0 !important;
+  margin-right: 0 !important;
+}
+
+ul[dir="rtl"] > li, ol[dir="rtl"] > li {
+  direction: rtl !important;
+  text-align: right !important;
+}
+
+li[dir="rtl"] {
+  direction: rtl !important;
+  text-align: right !important;
+}
+
+/* RTL tables */
+table[dir="rtl"] {
+  direction: rtl !important;
+}
+
+table[dir="rtl"] th,
+table[dir="rtl"] td,
+th[dir="rtl"],
+td[dir="rtl"] {
+  text-align: right !important;
+}
+
+/* RTL blockquotes */
+blockquote[dir="rtl"] {
+  border-right: 4px solid !important;
+  border-left: none !important;
+  padding-right: 1em !important;
+  padding-left: 0 !important;
+  direction: rtl !important;
+}
+/* BIDI-FIX-END */
